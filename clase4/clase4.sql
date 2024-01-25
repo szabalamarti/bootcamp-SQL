@@ -6,7 +6,7 @@ VALUES ('Documental dramatico', 13, 1);
 
 -- Agregar una película a la tabla movies. 
 INSERT INTO movies (title, rating, release_date, awards, genre_id, length)
-VALUES ('Oppenheimer', 10.0, '2023-10-10', 0, 1, 220);
+VALUES ('Oppenheimer', 10.0, '2023-10-10', 0, NULL, 220);
 
 -- Asociar a la película del punto 1. genre el género creado en el punto 2.
 UPDATE movies
@@ -21,7 +21,10 @@ WHERE first_name = 'Jon' AND last_name = 'Bernthal';
 
 -- Crear una tabla temporal copia de la tabla movies.
 DROP TABLE IF EXISTS movies_temp;
-CREATE TEMPORARY TABLE movies_temp AS
+CREATE TEMPORARY TABLE movies_temp LIKE movies;
+
+-- Insertar en la tabla temporal todos los datos de la tabla movies.
+INSERT INTO movies_temp
 SELECT * FROM movies;
 
 SELECT * FROM movies_temp;
